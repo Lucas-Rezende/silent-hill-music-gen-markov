@@ -1,1 +1,9 @@
 experiments/
+tools/
+SilentHill2 - vfs/
+SilentHill2 - sound/
+.gitattributes
+.venv/
+SilentHill2.iso
+corpus/game/
+corpus/others/

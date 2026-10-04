@@ -1,0 +1,53 @@
+bgm_id,sector_hex,title,use
+50000,0x00001CCD,Ordinary Vanity,no
+50001,0x00001D73,Confronting the Beast,no
+50002,0x00001DF5,Unknown,no
+50003,0x00001E89,Null Moon,yes
+50004,0x00001F04,Alone in the Town,no
+50005,0x00001FAB,Confronting the Beast,no
+50006,0x00002015,Warped Heart,no
+50007,0x000020BB,Confronting the Beast,no
+50008,0x00002158,TRUE,yes
+50009,0x0000217D,Unknown,no
+50010,0x000021CC,Unknown,no
+50011,0x00002232,Pianissimo Epilogue,yes
+50012,0x000022C5,Promise (Reprise),yes
+50013,0x00002355,Promise (Reprise),yes
+50014,0x000023F0,Daddy's Revenge,no
+50015,0x0000245A,Bed-Head,no
+50016,0x000024E0,Laura Plays the Piano,yes
+50017,0x00002512,Heaven's Night,no
+50018,0x000025B5,Unknown,no
+50019,0x00002639,Fermata in Mistic Air,yes
+50020,0x0000267A,Magdalene,yes
+50021,0x000026B4,Forest,yes
+50022,0x000026F4,Unknown,no
+50100,0x00002774,Unknown,no
+50101,0x0000280A,Executioner's Handywork,no
+50102,0x0000288E,Ashes and Ghost,no
+50103,0x000028F5,Unknown,no
+50104,0x0000294A,Mansion Horrors,no
+50105,0x000029C4,Hospital Predators,no
+50106,0x00002A0F,Running the Gantlet,no
+50107,0x00002A69,Prison of the Mind (Pt. 1),no
+50108,0x00002AFB,Basement Dwellers,no
+50109,0x00002BA2,Tormented Soul,no
+50110,0x00002C37,Unknown,no
+50111,0x00002CD2,Nurse Piper,no
+50112,0x00002D55,Music Box Melody,no
+50113,0x00002E73,Theme of Laura (Reprise),yes
+50114,0x00002EDF,White Noiz + Prisonic Fairytale + Forest Trail,no
+50115,0x00002F65,A World of Madness,no
+50116,0x00002FE0,The Labyrinth,no
+50117,0x0000300E,Combing Town West,no
+50118,0x00003058,Ominous Hallway + Butterflies & Secrets,no
+50119,0x00003099,Unknown,no
+50120,0x000030D5,Dueling with Eddie,no
+50121,0x0000313A,Unknown,no
+50122,0x00003196,Ashes and Tears (Black Fairy),no
+50123,0x00003203,The Day of Night,no
+50124,0x000032A0,Betrayal,no
+50125,0x0000333E,Pyramid Head's Lair + The Stairwell,no
+50126,0x0000334A,Toluca Lake,no
+50127,0x00002DD7,Music Box Melody 2 + Lakeview Hotel,no
+50128,0x000033E9,Unknown,no
