@@ -7,3 +7,7 @@ SilentHill2 - sound/
 SilentHill2.iso
 corpus/game/
 corpus/others/
+corpus/all/
+outputs/
+__pycache__/
+.vscode/
