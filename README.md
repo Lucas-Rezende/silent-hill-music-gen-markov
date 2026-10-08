@@ -1,6 +1,16 @@
 # silent-hill-music-gen-markov
 Experimental Markov Chain music generator pipeline based on the Silent Hill soundtrack.
 
+## Como utilizar
+Utilizando o seguinte comando. Os hiperparâmetros disponíveis são:
+- s: seed (apenas para facilitar a comparação entre os valores de n)
+- o: order (tamanho da memória)
+- n: numsongs (quantidade de músicas que devem ser geradas)
+
+```bash
+python3 main.py <corpus_path> <output_path> --order [o] --seed [s] --numsongs [n]
+```
+
 ## Como recriar o corpus
 O corpus foi construído utilizando arquivos do jogo e MIDIs feitos por fãs, disponibilizados na internet. Para replicar a parte do corpus correspondente às músicas presentes na ISO do jogo é necessário uma cópia do jogo.
 
@@ -49,3 +59,6 @@ corpus/others/
 A reconstrução do corpus do jogo utiliza as ferramentas [Nisto/sh2ex](https://github.com/Nisto/sh2ex) e [Nisto/kdt-tool](https://github.com/Nisto/kdt-tool), responsáveis por extrair os arquivos da ISO de Silent Hill 2 e pela conversão das sequências KDT1 para MIDI.
 
 Parte do corpus complementar foi construída a partir de transcrições MIDI feitas por fãs encontradas em acervos como MIDIFind, HomeTown e VGMusic.
+
+## Uso de IA
+Foi utilizado o GPT 5.6 Sol para gerar o script de extração e conversão dos BGM da ISO.
