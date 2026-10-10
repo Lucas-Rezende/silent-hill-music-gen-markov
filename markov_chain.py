@@ -1,62 +1,61 @@
-import random
+#########################################################################
+"""
+markov_chain.py
+
+Implementação de uma Cadeia de Markov de ordem N.
+"""
+
+# Dependências
 from collections import Counter, defaultdict
 
-START = "__START__"
-END = "__END__"
-MAX_EVENTS = 100_000
+# Constantes
+START = "<SOS>"
+END = "<EOS>"
+#########################################################################
 
-def build_counts(songs, order):
-    """Conta quantas vezes cada transição acontece."""
-    counts = defaultdict(Counter)
+def train_markov_model(songs, order):
+    """Treina o modelo de Markov a partir do corpus, retornando
+    as probabilidades de transição para cada contexto."""
+    song_sequences = add_start_end_symbols(songs, order)
+    transitions = count_transitions(song_sequences, order)
+    markov_probabilities = calculate_transition_probabilities(transitions)
+
+    return markov_probabilities
+
+
+def add_start_end_symbols(songs, order):
+    """Adiciona os símbolos de início e fim a cada música do corpus."""
+    song_sequences = []
 
     for song in songs:
         sequence = [START] * order + song + [END]
+        song_sequences.append(sequence)
 
+    return song_sequences
+
+
+def count_transitions(song_sequences, order):
+    """Conta quantas vezes cada símbolo aparece após cada contexto
+    de tamanho `order`."""
+    transitions = defaultdict(Counter)
+
+    for sequence in song_sequences:
         for i in range(order, len(sequence)):
-            state = tuple(sequence[i - order : i])
+            context = tuple(sequence[i - order:i])
             next_symbol = sequence[i]
+            transitions[context][next_symbol] += 1
 
-            counts[state][next_symbol] += 1
+    return transitions
 
-    return counts
 
-def calculate_probabilities(counts):
-    """Calcula as probabilidades de transição."""
+def calculate_transition_probabilities(transitions):
+    """Calcula P(próximo símbolo | contexto)."""
     probabilities = {}
 
-    for state, transitions in counts.items():
-        total = sum(transitions.values())
-
-        probabilities[state] = {
-            symbol: count / total for symbol, count in transitions.items()
+    for context, next_symbols in transitions.items():
+        total = sum(next_symbols.values())
+        probabilities[context] = {
+            symbol: count / total for symbol, count in next_symbols.items()
         }
 
     return probabilities
-
-def train_markov_model(songs, order):
-    counts = build_counts(songs, order)
-    return calculate_probabilities(counts)
-
-def sample_next(options, rng):
-    """Sorteia a próxima transição."""
-    return rng.choices(
-        list(options),
-        weights=options.values(),
-    )[0]
-
-def generate_new_song(probs, order, seed):
-    """Gera uma nova sequência usando a Cadeia de Markov."""
-    rng = random.Random(seed)
-    state = (START,) * order
-    song = []
-
-    for _ in range(MAX_EVENTS):
-        next_symbol = sample_next(probs[state], rng)
-
-        if next_symbol == END:
-            return song
-
-        song.append(next_symbol)
-        state = state[1:] + (next_symbol,)
-
-    return song
