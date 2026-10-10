@@ -5,8 +5,9 @@ SilentHill2 - sound/
 .gitattributes
 .venv/
 SilentHill2.iso
-corpus/game/
-corpus/others/
+corpus/game-only/
+corpus/individual-game-corpus/
+corpus/not-official-only/
 corpus/all/
 outputs/
 __pycache__/
