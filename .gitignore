@@ -5,10 +5,10 @@ SilentHill2 - sound/
 .gitattributes
 .venv/
 SilentHill2.iso
-corpus/game-only/
-corpus/individual-game-corpus/
-corpus/not-official-only/
-corpus/all/
+corpus/others
+corpus/rendered
+Silent Guy Vol. 3 SoundFont
+corpus/*
 outputs/
 __pycache__/
 .vscode/
