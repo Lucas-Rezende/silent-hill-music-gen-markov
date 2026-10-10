@@ -5,10 +5,9 @@ SilentHill2 - sound/
 .gitattributes
 .venv/
 SilentHill2.iso
-corpus/others
-corpus/rendered
 Silent Guy Vol. 3 SoundFont
+outputs/others/
+outputs/rendered/
 corpus/*
-outputs/
 __pycache__/
 .vscode/

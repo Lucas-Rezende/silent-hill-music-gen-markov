@@ -53,5 +53,16 @@ def convert_to_pianoroll(song: muspy.Music, resolution: int) -> list[tuple[int, 
 
 
 def convert_corpus_to_pianoroll(corpus: list[muspy.Music], resolution: int) -> list[list[tuple[int, ...]]]:
-    """Converte todo o corpus para piano roll."""
-    return [convert_to_pianoroll(song, resolution) for song in corpus]
+    """Converte todo o corpus para piano roll, ignorando músicas sem notas válidas."""
+    pianorolls = []
+
+    for i, song in enumerate(corpus):
+        try:
+            pianorolls.append(convert_to_pianoroll(song, resolution))
+        except ValueError as error:
+            print(f"Música {i + 1} ignorada: {error}")
+
+    if not pianorolls:
+        raise ValueError("Nenhuma música válida após o pré-processamento.")
+
+    return pianorolls

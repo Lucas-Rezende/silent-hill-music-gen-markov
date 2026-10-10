@@ -7,19 +7,17 @@ pelo modelo de Markov.
 """
 
 # Dependências
-import random
-from markov_chain import START, END
 from pathlib import Path
+import random
 import muspy
+from markov_chain import START, END
 
 # Constantes
 MAX_EVENTS = 50_000
 #########################################################################
 
 def generate_song(probs, order, seed):
-    """
-    Gera uma nova sequência usando o modelo treinado.
-    """
+    """Gera uma nova sequência usando o modelo treinado."""
     random_generator = random.Random(seed)
     context = (START,) * order
     song = []
@@ -42,6 +40,7 @@ def sample_next_symbol(probs, context, random_generator):
     """
     options = probs[context]
     return random_generator.choices(population=list(options), weights=options.values(), k=1)[0]
+
 
 def write_midi(song, path: str | Path, resolution: int):
     """Converte a sequência gerada em um arquivo MIDI."""
