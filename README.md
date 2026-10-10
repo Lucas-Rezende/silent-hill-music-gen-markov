@@ -1,64 +1,52 @@
 # silent-hill-music-gen-markov
-Experimental Markov Chain music generator pipeline based on the Silent Hill soundtrack.
+Pipeline para geração de música simbólica (MIDI) com Cadeias de Markov, utilizando como corpus músicas da trilha sonora de *Silent Hill 1–4*.
 
-## Como utilizar
-Utilizando o seguinte comando. Os hiperparâmetros disponíveis são:
-- s: seed (apenas para facilitar a comparação entre os valores de n)
-- o: order (tamanho da memória)
-- n: numsongs (quantidade de músicas que devem ser geradas)
-
+## Como utilizar o projeto
+Primeiramente, instale as dependências (para facilitar, use ambiente):
 ```bash
-python3 main.py <corpus_path> <output_path> --order [o] --seed [s] --numsongs [n]
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Em seguida, basta rodar:
+```bash
+PYTHONWARNINGS="ignore:Unable to import Axes3D" python3 main.py output/<specific_corpus_path> <output_path> --order <N> --resolution <R> --seed <seed> --numsongs <n>
+```
+Hiperparâmetros disponíveis:
+- `--order`: ordem `N` da Cadeia de Markov, i.e., quantidade de estados anteriores utilizados como contexto.
+- `--resolution`: quantidade de passos temporais por semínima.
+- `--seed`: semente aleatória para reprodutibilidade.
+- `--numsongs`: quantidade de músicas geradas.
+
+Os hiperparâmetros avaliados no trabalho são `order` e `resolution`.
+
+## Como replicar os experimentos
+```bash
+mkdir -p outputs
+
+for resolution in 1 2 4 8; do
+    for order in 1 2 3 4 5 10 15 50 100; do
+        echo "corpus=all | N=$order | resolution=$resolution"
+
+        PYTHONWARNINGS="ignore:Unable to import Axes3D" \
+        python3 main.py corpus/all outputs \
+            --order "$order" \
+            --resolution "$resolution" \
+            --seed 42 \
+            --numsongs 5
+    done
+done
 ```
 
 ## Como recriar o corpus
-O corpus foi construído utilizando arquivos do jogo e MIDIs feitos por fãs, disponibilizados na internet. Para replicar a parte do corpus correspondente às músicas presentes na ISO do jogo é necessário uma cópia do jogo.
-
-Nesse sentido, possuindo alguma das ISOs aceitas (ver README do sh2ex), utilize o repositório Nisto/sh2ex e Nisto/kdt-tool. Clone ambos dentro da pasta `tools`:
-
-```bash
-mkdir -p tools
-cd tools
-
-git clone https://github.com/Nisto/sh2ex.git
-git clone https://github.com/Nisto/kdt-tool.git
-```
-
-Em seguida, Execute sh2ex passando o caminho da ISO:
-```bash
-cd sh2ex
-python3 sh2ex.py "/path/to/SilentHill2.iso"
-```
-
-Os experimentos deste projeto foram realizados utilizando SLES-51156 - Director's Cut (v1.02).
-
-Após executar o sh2ex.py na ISO do jogo, serão criadas duas pastas. Usaremos exclusivamente a pasta de nome '[Your ISO name] - sound'. Encontre esta pasta para garantir que o processo deu certo. Nesta pasta estão as músicas sequenciadas do jogo, armazenadas em grupos de arquivos `.TD`, `.HD` e `.BD` (.TD: contém dados de sequência e eventos, .HD: contém metadados dos bancos de sons, .BD: contém os samples utilizados pelos bancos de sons).
-
-Para o treinamento, usaremos apenas os do bloco KDT1, presentes nos arquivos .TD, pois podem ser convertidos para MIDI.
-
-Assim, use o script `extract_convert_all_bgm.py`, que automatiza o processo de converter os arquivos `.TD` em MIDI. Use:
-
-```bash
-python3 scripts/extract_convert_all_bgm.py \
-    "/path/to/[Your ISO name] - sound"
-```
-
-Após isso, os MIDIs baseados nos arquivos do jogo estarão em `corpus/game`. Em seguida, adicione seus próprios MIDIs ou outros encontrados na internet de músicas do jogo para encorporar o corpus. Para os experimentos deste trabalho, as músicas útilizadas estão disponíveis em `corpus/metadata/other_songs.csv`.
-Os MIDIs externos estão organizados em `corpus/others`. Cada som está na pasta de seu respectivo jogo.
-
-```bash
-corpus/others/
-├── SH1/
-├── SH2/
-├── SH3/
-└── SH4/
-```
+Consulte `_metadata/CORPUS.md`
 
 ## Créditos e ferramentas utilizadas
-
-A reconstrução do corpus do jogo utiliza as ferramentas [Nisto/sh2ex](https://github.com/Nisto/sh2ex) e [Nisto/kdt-tool](https://github.com/Nisto/kdt-tool), responsáveis por extrair os arquivos da ISO de Silent Hill 2 e pela conversão das sequências KDT1 para MIDI.
-
-Parte do corpus complementar foi construída a partir de transcrições MIDI feitas por fãs encontradas em acervos como MIDIFind, HomeTown e VGMusic.
+Parte do corpus complementar foi obtida a partir de transcrições MIDI feitas por fãs disponíveis em acervos como MIDIFind, HomeTown e VGMusic.
 
 ## Uso de IA
-Foi utilizado o GPT 5.6 Sol para gerar o script de extração e conversão dos BGM da ISO.
+Foi utilizado o GPT-5.6 Sol para:
+1. Criação do script `scripts/extract_convert_all_bgm.py`, para ajudar na geração do corpus.
+2. Auxiliar no resumo e organização do README.
+3. Auxiliar na revisão gramatical e teórica do resumo do trabalho.
