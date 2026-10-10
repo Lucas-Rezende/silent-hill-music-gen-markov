@@ -8,6 +8,11 @@ SilentHill2.iso
 Silent Guy Vol. 3 SoundFont
 outputs/others/
 outputs/rendered/
-corpus/*
+corpus/all/*
+corpus/all-separated-by-game/*
+corpus/all-without-repetition/*
+corpus/game-only/*
+corpus/not-official-only/*
+corpus_test/
 __pycache__/
 .vscode/
