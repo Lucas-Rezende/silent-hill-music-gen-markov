@@ -49,7 +49,7 @@ def count_transitions(song_sequences, order):
 
 
 def calculate_transition_probabilities(transitions):
-    """Calcula P(próximo símbolo | contexto)."""
+    """Calcula P(next | contexto)."""
     probabilities = {}
 
     for context, next_symbols in transitions.items():

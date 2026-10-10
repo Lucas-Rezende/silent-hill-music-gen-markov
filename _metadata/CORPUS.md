@@ -1,3 +1,4 @@
+## Recriando o corpus a partir da ISO
 Para reconstruir essa parte do corpus, é necessária uma cópia compatível do jogo. Consulte o README do [Nisto/sh2ex](https://github.com/Nisto/sh2ex) para verificar as versões suportadas.
 
 Clone as ferramentas em `tools/`:
