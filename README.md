@@ -7,7 +7,7 @@ Clone o repositório e instale as dependências em um ambiente virtual:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r _requirements.txt
 ```
 
 O desenvolvimento foi realizado com `Python 3.10.12`.

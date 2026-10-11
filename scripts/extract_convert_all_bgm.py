@@ -7,9 +7,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CSV = ROOT / "corpus/metadata/map_sh2_tracks.csv"
+CSV = ROOT / "_metadata/map_sh2_tracks.csv"
 KDT_TOOL = ROOT / "tools/kdt-tool/kdt-tool.py"
-OUT_DIR = ROOT / "corpus/game"
+OUT_DIR = ROOT / "corpus/game-only"
 
 def main():
     if len(sys.argv) != 2:
