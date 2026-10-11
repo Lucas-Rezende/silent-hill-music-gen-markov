@@ -1,8 +1,7 @@
 ## Recriando o corpus
 
 Os arquivos MIDI utilizados nos experimentos não são distribuídos neste repositório.
-
-Crie a estrutura utilizada pelo projeto:
+Para utilizar o mesmo corpus, crie a estrutura utilizada pelo projeto:
 
 ```bash
 mkdir -p corpus/all \
@@ -46,7 +45,7 @@ python3 sh2ex.py "/path/to/SilentHill2.iso"
 cd ../..
 ```
 
-Os experimentos deste projeto utilizaram a versão `SLES-51156 - Director's Cut (v1.02)`.
+Os experimentos deste projeto utilizaram a versão `SLES-51156 - Director's Cut (v1.02)` e utilizaram a pasta `all/`, i.e., todas as músicas disponíveis.
 
 Após a extração, utilize o script abaixo para extrair as sequências KDT1 dos arquivos `.TD` e convertê-las para MIDI:
 
