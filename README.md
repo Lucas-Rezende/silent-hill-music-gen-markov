@@ -11,11 +11,8 @@ pip install -r _requirements.txt
 ```
 
 O desenvolvimento foi realizado com `Python 3.10.12`.
-Os arquivos MIDI do corpus não são distribuídos no repositório. A estrutura de diretórios está disponível em `corpus/`, e as instruções para reconstrução estão em:
 
-```text
-/_metadata/CORPUS.md
-```
+Os arquivos MIDI do corpus não são distribuídos no repositório. As instruções para reconstrução e organização do corpus estão em `_metadata/CORPUS.md`.
 
 Após reconstruir o corpus, execute:
 
@@ -52,9 +49,12 @@ for resolution in 1 2 4 8; do
 done
 ```
 
+## Exemplos gerados
+Exemplos de músicas geradas em MIDI e suas respectivas versões sintetizadas em áudio estão disponíveis em `outputs/favorites/`.
+
 ## Créditos
 A reconstrução dos arquivos de *Silent Hill 2* utiliza [Nisto/sh2ex](https://github.com/Nisto/sh2ex) e [Nisto/kdt-tool](https://github.com/Nisto/kdt-tool).
-Parte do corpus foi obtida a partir MIDI disponíveis em acervos como MIDIFind, HomeTown e VGMusic.
+Parte do corpus foi obtida a partir de arquivos MIDI disponíveis em acervos como MIDIFind, HomeTown e VGMusic.
 
 ## Uso de IA
 Foi utilizado o GPT-5.6 Sol para:
