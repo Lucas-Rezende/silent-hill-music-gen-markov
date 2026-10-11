@@ -23,6 +23,7 @@ SOUNDFONTS = {
     },
 }
 
+
 def find_soundfont(filename: str) -> Path:
     matches = sorted(
         SOUNDFONT_ROOT.rglob(filename),
@@ -57,7 +58,7 @@ def set_program(input_path: Path, output_path: Path, program: int) -> None:
     midi.save(output_path)
 
 
-def synthesize(
+def render_wav(
     midi_path: Path,
     wav_path: Path,
     soundfont: Path,
@@ -78,11 +79,34 @@ def synthesize(
     )
 
 
+def convert_to_mp3(
+    wav_path: Path,
+    mp3_path: Path,
+    bitrate: str,
+) -> None:
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-y",
+            "-loglevel",
+            "error",
+            "-i",
+            str(wav_path),
+            "-codec:a",
+            "libmp3lame",
+            "-b:a",
+            bitrate,
+            str(mp3_path),
+        ],
+        check=True,
+    )
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description=(
-            "Sintetiza os MIDIs de outputs/favorites/MIDI usando as SoundFonts "
-            "Instruments e Pads do Silent Guy Vol. 2."
+            "Sintetiza os MIDIs de outputs/favorites/MIDI em MP3 usando "
+            "as SoundFonts Instruments PS2 e Pads PS2 do Silent Guy Vol. 2."
         )
     )
 
@@ -109,7 +133,13 @@ def parse_arguments():
         "--sample-rate",
         type=int,
         default=44100,
-        help="Sample rate dos WAVs. Padrão: 44100.",
+        help="Sample rate usado na renderização intermediária. Padrão: 44100.",
+    )
+
+    parser.add_argument(
+        "--bitrate",
+        default="192k",
+        help="Bitrate dos MP3s. Padrão: 192k.",
     )
 
     args = parser.parse_args()
@@ -138,6 +168,7 @@ def render_collection(
     midi_files: list[Path],
     program: int | None,
     sample_rate: int,
+    bitrate: str,
 ) -> None:
     output_dir = FAVORITES_DIR / output_folder
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -147,6 +178,7 @@ def render_collection(
     print(f"Versão: {name}")
     print(f"SoundFont: {soundfont}")
     print(f"Saída: {output_dir}")
+    print(f"Formato: MP3 ({bitrate})")
     print("=" * 72)
 
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -156,19 +188,28 @@ def render_collection(
             source_midi = midi_path
 
             if program is not None:
-                source_midi = temp_dir / midi_path.name
+                source_midi = temp_dir / f"program_{midi_path.name}"
                 set_program(midi_path, source_midi, program)
 
-            wav_path = output_dir / f"{midi_path.stem}.wav"
+            wav_path = temp_dir / f"{midi_path.stem}.wav"
+            mp3_path = output_dir / f"{midi_path.stem}.mp3"
 
             print(f"Sintetizando: {midi_path.name}")
-            synthesize(
+
+            render_wav(
                 source_midi,
                 wav_path,
                 soundfont,
                 sample_rate,
             )
-            print(f"Gerado: {wav_path.relative_to(ROOT)}")
+
+            convert_to_mp3(
+                wav_path,
+                mp3_path,
+                bitrate,
+            )
+
+            print(f"Gerado: {mp3_path.relative_to(ROOT)}")
 
 
 def main():
@@ -178,6 +219,12 @@ def main():
         raise SystemExit(
             "FluidSynth não foi encontrado no PATH.\n"
             "Confirme com: fluidsynth --version"
+        )
+
+    if shutil.which("ffmpeg") is None:
+        raise SystemExit(
+            "FFmpeg não foi encontrado no PATH.\n"
+            "Confirme com: ffmpeg -version"
         )
 
     if not INPUT_DIR.exists():
@@ -209,6 +256,7 @@ def main():
             midi_files=midi_files,
             program=args.program,
             sample_rate=args.sample_rate,
+            bitrate=args.bitrate,
         )
 
 

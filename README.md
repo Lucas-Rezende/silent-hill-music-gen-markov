@@ -10,7 +10,7 @@ source .venv/bin/activate
 pip install -r _requirements.txt
 ```
 
-Os arquivos MIDI do corpus não são distribuídos no repositório. As instruções para reconstrução e organização do corpus estão em `_metadata/CORPUS.md`, caso queira utilizar as mesmas músicas. Caso queira usar seus próprios arquivos MIDI, basta criar uma pasta (<output_path>) e adicionar os arquivos MIDI dentro dela.
+Os arquivos MIDI do corpus não são distribuídos no repositório. As instruções para reconstrução e organização do corpus estão em `_metadata/CORPUS.md`, caso queira utilizar as mesmas músicas. Caso queira usar seus próprios arquivos MIDI, basta organizá-los em uma pasta e passar o caminho dessa pasta como primeiro argumento do programa.
 
 Após reconstruir o corpus, execute:
 
@@ -60,6 +60,6 @@ A soundfont utilizada para renderizar os áudios sintetizados foi [Silent Guy Vo
 Foi utilizado o GPT-5.6 Sol para:
 1. auxiliar na criação dos scripts (utilizados para construir o corpus e renderizar as músicas):
    1.  `scripts/extract_convert_all_bgm.py`
-   2.  `synthesize_favorites_vol2`
+   2.  `synthesize_favorites_vol2.py`
 2. auxiliar na síntese e organização do README,
 3. auxiliar na revisão gramatical e teórica do resumo do trabalho.
