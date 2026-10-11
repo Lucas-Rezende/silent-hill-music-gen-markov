@@ -10,8 +10,6 @@ source .venv/bin/activate
 pip install -r _requirements.txt
 ```
 
-Os arquivos MIDI do corpus não são distribuídos no repositório. As instruções para reconstrução e organização do corpus estão em `_metadata/CORPUS.md`, caso queira utilizar as mesmas músicas. Caso queira usar seus próprios arquivos MIDI, basta organizá-los em uma pasta e passar o caminho dessa pasta como primeiro argumento do programa.
-
 Após reconstruir o corpus, execute:
 
 ```bash
@@ -31,13 +29,17 @@ Parâmetros:
 
 Os hiperparâmetros avaliados no trabalho são `order` e `resolution`.
 
+## Corpus
+Os arquivos MIDI do corpus não são distribuídos no repositório. As instruções para reconstrução e organização do corpus estão em `_metadata/CORPUS.md`, caso queira utilizar as mesmas músicas. Caso queira usar seus próprios arquivos MIDI, basta organizá-los em uma pasta e passar o caminho dessa pasta como primeiro argumento do programa.
+
 ## Replicação dos experimentos
-Para gerar os mesmos MIDI utilizados na experimentação e discussão dos resultados, basta rodar:
+Para gerar os mesmos arquivos MIDI utilizados na experimentação e discussão dos resultados, basta rodar:
+
 ```bash
 mkdir -p outputs
 
 for resolution in 1 2 4 8; do
-    for order in 1 2 3 4 5 10 15 50 100; do
+    for order in 1 2 3 4 5 10 15 100; do
         PYTHONWARNINGS="ignore:Unable to import Axes3D" \
         python3 main.py corpus/all outputs \
             --order "$order" \
@@ -51,15 +53,18 @@ done
 ## Exemplos gerados
 Exemplos de músicas geradas em MIDI e suas respectivas versões sintetizadas em áudio (.mp3) estão disponíveis em `outputs/favorites/`.
 
+## Arquivos sintetizados
+A renderização dos exemplos em áudio utiliza FluidSynth e FFmpeg, que devem estar instalados no sistema.
+
 ## Créditos
 A reconstrução dos arquivos de *Silent Hill 2* utiliza [Nisto/sh2ex](https://github.com/Nisto/sh2ex) e [Nisto/kdt-tool](https://github.com/Nisto/kdt-tool).
 Parte do corpus foi obtida a partir de arquivos MIDI disponíveis em acervos como MIDIFind, HomeTown e VGMusic.
-A soundfont utilizada para renderizar os áudios sintetizados foi [Silent Guy Vol. 2 PS2](https://ko-fi.com/s/e87f78ff2c), feita por SoundFontGuy.
+A SoundFont utilizada para renderizar os áudios sintetizados foi [Silent Guy Vol. 2 PS2](https://ko-fi.com/s/e87f78ff2c), feita por SoundFontGuy.
 
 ## Uso de IA
 Foi utilizado o GPT-5.6 Sol para:
 1. auxiliar na criação dos scripts (utilizados para construir o corpus e renderizar as músicas):
-   1.  `scripts/extract_convert_all_bgm.py`
-   2.  `synthesize_favorites_vol2.py`
-2. auxiliar na síntese e organização do README,
+   1. `scripts/extract_convert_all_bgm.py`
+   2. `scripts/synthesize_favorites_vol2.py`
+2. auxiliar na síntese e organização do README;
 3. auxiliar na revisão gramatical e teórica do resumo do trabalho.
