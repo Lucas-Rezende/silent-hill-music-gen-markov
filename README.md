@@ -49,7 +49,7 @@ done
 ```
 
 ## Exemplos gerados
-Exemplos de músicas geradas em MIDI e suas respectivas versões sintetizadas em áudio (.wav) estão disponíveis em `outputs/favorites/`.
+Exemplos de músicas geradas em MIDI e suas respectivas versões sintetizadas em áudio (.mp3) estão disponíveis em `outputs/favorites/`.
 
 ## Créditos
 A reconstrução dos arquivos de *Silent Hill 2* utiliza [Nisto/sh2ex](https://github.com/Nisto/sh2ex) e [Nisto/kdt-tool](https://github.com/Nisto/kdt-tool).
